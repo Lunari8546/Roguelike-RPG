@@ -1,4 +1,4 @@
--- Tiles: 0(Floor), 1(Wall)
+-- Tiles: 0(Floor), 1(Wall), 2(Ladder), #(Void)
 
 local tileLayer = 1;
 
@@ -52,7 +52,7 @@ function drawTilemap(roomIndex)
                 elseif tileIndex == 1 then
                     local tile = {
                         draw = function()
-                            love.graphics.draw(floor, tileSize * j, tileSize * i, 0, tileScale, tileScale);
+                            love.graphics.draw(wall, tileSize * j, tileSize * i, 0, tileScale, tileScale);
                         end
                     };
 
@@ -66,9 +66,21 @@ function drawTilemap(roomIndex)
                 local tileIndex = tilemap[i][j];
 
                 if tileIndex == 0 then
-                    love.graphics.draw(floor, tileSize * j, tileSize * i, 0, tileScale, tileScale);
+                    local tile = {
+                        draw = function()
+                            love.graphics.draw(floor, tileSize * j, tileSize * i, 0, tileScale, tileScale);
+                        end
+                    };
+
+                    renderer.renderMe(tile, tileLayer);
                 elseif tileIndex == 1 then
-                    love.graphics.draw(wall, tileSize * j, tileSize * i, 0, tileScale, tileScale);
+                    local tile = {
+                        draw = function()
+                            love.graphics.draw(wall, tileSize * j, tileSize * i, 0, tileScale, tileScale);
+                        end
+                    };
+
+                    renderer.renderMe(tile, tileLayer);
                 end
             end
         end
