@@ -25,7 +25,9 @@ function love.load()
 end
 
 function love.update(dt)
-    playerControls(world, dt);
+    playerControls(dt);
+
+    Phi.change_debug();
 end
 
 function love.draw()

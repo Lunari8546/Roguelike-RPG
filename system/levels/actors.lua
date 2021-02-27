@@ -1,5 +1,3 @@
-local bump = require 'libraries/bump/bump';
-
 require 'system/renderer';
 require 'system/physics';
 
@@ -22,7 +20,7 @@ local function drawPlayer()
     });
 end
 
-function drawActors(roomIndex, developerMode)
+function drawActors(roomIndex)
     drawPlayer();
 
     if roomIndex == 1 then
@@ -30,36 +28,39 @@ function drawActors(roomIndex, developerMode)
             actor.draw = function()
                 love.graphics.draw (
                     actor.sprite,
-                    actor.x * tileSize,
-                    actor.y * tileSize,
+                    actor.x,
+                    actor.y,
                     0,
                     actor.scale,
                     actor.scale
                 );
             end
 
-            addPhysics(actor);
+            Phi.add(actor, actor.x * 47, actor.y * 47, 47, 47);
 
             renderer.renderMe(actor);
         end
     end
 end
 
-function playerControls(world, dt)
+function playerControls(dt)
     for i = 1, #actors do
         if actors[i].type == 'player' then
+            local targetX = actors[i].pos.x + (actors[i].vel.x * dt);
+            local targetY = actors[i].pos.y + (actors[i].vel.y * dt);
+
             if love.keyboard.isDown('up') then
-                actors[i].vel.y = -6;
+                actors[i].vel.y = -200;
             elseif love.keyboard.isDown('down') then
-                actors[i].vel.y = 6;
+                actors[i].vel.y = 200;
             else
                 actors[i].vel.y = 0;
             end
 
             if love.keyboard.isDown('left') then
-                actors[i].vel.x = -6;
+                actors[i].vel.x = -200;
             elseif love.keyboard.isDown('right') then
-                actors[i].vel.x = 6;
+                actors[i].vel.x = 200;
             else
                 actors[i].vel.x = 0;
             end
@@ -83,8 +84,7 @@ function playerControls(world, dt)
             local futureX = actors[i].x + (actors[i].vel.x * dt);
             local futureY = actors[i].y + (actors[i].vel.y * dt);
 
-            local nextX, nextY, cols, len = world:move(actors[i], futureX, futureY);
-
+            local nextX, nextY, cols, len = Phi.move(actors[i], futureX, futureY, true);
             actors[i].x = nextX;
             actors[i].y = nextY;
         end

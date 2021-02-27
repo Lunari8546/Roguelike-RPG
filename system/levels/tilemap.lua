@@ -30,8 +30,8 @@ function drawTilemap(roomIndex, developerMode)
 
             if tileIndex == 0 then
                 local tile = {
-                    x = tileSize * j,
-                    y = tileSize * i,
+                    x = j,
+                    y = i,
                     scale = tileScale
                 };
 
@@ -44,14 +44,14 @@ function drawTilemap(roomIndex, developerMode)
                 local tile = {
                     x = tileSize * j,
                     y = tileSize * i,
-                    scale = tileScale
+                    scale = 1
                 };
 
                 tile.draw = function()
                     love.graphics.draw(wall, tileSize * j, tileSize * i, 0, tileScale, tileScale);
                 end
 
-                addPhysics(tile);
+                Phi.add(tile, tile.x, tile.y, 47, 47);
 
                 renderer.renderMe(tile, tileLayer);
             end
