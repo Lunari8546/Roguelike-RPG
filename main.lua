@@ -1,6 +1,7 @@
 local moonshine = require 'libraries/moonshine';
 
 renderer = require('system/renderer'):init(2);
+require 'system/physics';
 
 require 'system/levels/room';
 require 'system/levels/actors';
@@ -20,20 +21,19 @@ function love.load()
     effect.vignette.radius = 0.98;
     effect.chromasep.radius = 1.6;
 
-    drawRoom(roomIndex, world);
+    drawRoom(roomIndex);
 end
 
 function love.update(dt)
-
+    playerControls(world, dt);
 end
 
 function love.draw()
     local fps = love.timer.getFPS();
 
-    playerMovement(world);
-
     effect(function()
         love.graphics.print('FPS: '..tostring(fps));
+        love.graphics.print('Level: '..tostring(roomIndex), 100);
 
         renderer.draw();
     end)

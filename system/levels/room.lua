@@ -1,9 +1,9 @@
 require 'system/levels/actors';
 require 'system/levels/tilemap';
 
-function drawRoom(roomIndex)
-    drawActors(roomIndex);
-    drawTilemap(roomIndex);
-end
+developerMode = false;
 
-return drawRoom(roomIndex);
+function drawRoom(roomIndex)
+    drawActors(roomIndex, developerMode);
+    drawTilemap(roomIndex, developerMode);
+end
