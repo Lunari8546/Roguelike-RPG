@@ -50,17 +50,17 @@ function playerControls(dt)
             local targetY = actors[i].pos.y + (actors[i].vel.y * dt);
 
             if love.keyboard.isDown('up') then
-                actors[i].vel.y = -200;
+                actors[i].vel.y = -280;
             elseif love.keyboard.isDown('down') then
-                actors[i].vel.y = 200;
+                actors[i].vel.y = 280;
             else
                 actors[i].vel.y = 0;
             end
 
             if love.keyboard.isDown('left') then
-                actors[i].vel.x = -200;
+                actors[i].vel.x = -280;
             elseif love.keyboard.isDown('right') then
-                actors[i].vel.x = 200;
+                actors[i].vel.x = 280;
             else
                 actors[i].vel.x = 0;
             end
