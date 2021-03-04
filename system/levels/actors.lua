@@ -44,25 +44,25 @@ function drawActors(roomIndex)
 end
 
 function playerControls(dt)
-    for i = 1, #actors do
-        if actors[i].type == 'player' then
-            local targetX = actors[i].pos.x + (actors[i].vel.x * dt);
-            local targetY = actors[i].pos.y + (actors[i].vel.y * dt);
+    for _, actor in ipairs(actors) do
+        if actor.type == 'player' then
+            local targetX = actor.pos.x + (actor.vel.x * dt);
+            local targetY = actor.pos.y + (actor.vel.y * dt);
 
             if love.keyboard.isDown('up') then
-                actors[i].vel.y = -280;
+                actor.vel.y = -280;
             elseif love.keyboard.isDown('down') then
-                actors[i].vel.y = 280;
+                actor.vel.y = 280;
             else
-                actors[i].vel.y = 0;
+                actor.vel.y = 0;
             end
 
             if love.keyboard.isDown('left') then
-                actors[i].vel.x = -280;
+                actor.vel.x = -280;
             elseif love.keyboard.isDown('right') then
-                actors[i].vel.x = 280;
+                actor.vel.x = 280;
             else
-                actors[i].vel.x = 0;
+                actor.vel.x = 0;
             end
 
             if love.keyboard.isDown('q') then
@@ -81,12 +81,12 @@ function playerControls(dt)
 
             end
 
-            local futureX = actors[i].x + (actors[i].vel.x * dt);
-            local futureY = actors[i].y + (actors[i].vel.y * dt);
+            local futureX = actor.x + (actor.vel.x * dt);
+            local futureY = actor.y + (actor.vel.y * dt);
 
-            local nextX, nextY, cols, len = Phi.move(actors[i], futureX, futureY, true);
-            actors[i].x = nextX;
-            actors[i].y = nextY;
+            local nextX, nextY, cols, len = Phi.move(actor, futureX, futureY, true);
+            actor.x = nextX;
+            actor.y = nextY;
         end
     end
 end

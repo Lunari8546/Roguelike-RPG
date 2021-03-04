@@ -4,11 +4,8 @@ require 'system/physics';
 
 local tileLayer = 1;
 
-function drawTilemap(minWidth, minHeight, maxWidth, maxHeight)
+function drawTilemap_Room(width, height)
     local tilemap = {};
-
-    local width = love.math.random(minWidth, maxWidth);
-    local height = love.math.random(minHeight, maxHeight);
 
     for i = 0, height do
         tilemap[i] = {};
@@ -34,6 +31,19 @@ function drawTilemap(minWidth, minHeight, maxWidth, maxHeight)
         tilemap[i][#tilemap[i]] = 1;
     end
 
+    renderTilemap(tilemap);
+end
+
+function drawTilemap_Corridor(i, roomWidth, roomHeight)
+    local tilemap = {};
+
+    local position = roomWidth;
+    local height = love.math.random(5, 10);
+
+    -- renderTilemap(tilemap);
+end
+
+function renderTilemap(tilemap)
     local floor = love.graphics.newImage('graphics/tiles/floor.png');
     local wall = love.graphics.newImage('graphics/tiles/wall.png');
     local ladder = love.graphics.newImage('graphics/tiles/ladder.png');

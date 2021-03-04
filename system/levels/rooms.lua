@@ -10,11 +10,19 @@ function generateRooms(roomIndex)
 end
 
 function generateRoom(roomIndex)
-    local minWidth = love.math.random(roomIndex + 5, roomIndex + 10);
-    local minHeight = love.math.random(roomIndex + 5, roomIndex + 10);
-    local maxWidth = love.math.random(minWidth, minWidth + 5);
-    local maxHeight = love.math.random(minHeight, minHeight + 5);
+    local minWidth = love.math.random(roomIndex + 5, roomIndex + 7);
+    local minHeight = love.math.random(roomIndex + 5, roomIndex + 7);
+    local maxWidth = love.math.random(minWidth, minWidth + 3);
+    local maxHeight = love.math.random(minHeight, minHeight + 3);
 
-    drawTilemap(minWidth, minHeight, maxWidth, maxHeight);
+    local width = love.math.random(minWidth, maxWidth);
+    local height = love.math.random(minHeight, maxHeight);
+
+    local room = { width, height };
+    table.insert(rooms, room);
+
+    drawTilemap_Room(width, height);
     drawActors(roomIndex);
+
+    drawTilemap_Corridor(0, width, height);
 end
